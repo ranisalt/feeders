@@ -16,6 +16,7 @@ RUN apt update -yq && apt download -yq fr24feed && \
     dpkg-deb --build pkg && dpkg --install pkg.deb && apt install -yq --fix-broken && \
     rm pkg.deb
 
+RUN useradd -M -r -u 999 fr24
 USER fr24
 
 CMD ["/usr/bin/fr24feed"]
