@@ -1,0 +1,41 @@
+name: ci
+
+on:
+  push:
+    branches: main
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        image: [dump1090, fr24feed, piaware]
+
+    permissions:
+      packages: write
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: linux/arm64
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          context: "{{ defaultContext }}:${{ matrix.image }}"
+          platforms: linux/arm64
+          push: ${{ github.event_name == 'push' }}
+          tags: ghcr.io/ranisalt/${{ matrix.image }}:latest
