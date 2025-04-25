@@ -1,15 +1,22 @@
-name: ci
+name: Build image
 
 on:
-  push:
-    branches: main
+  workflow_call:
+    inputs:
+      path:
+        required: true
+        type: string
+      push:
+        default: false
+        required: false
+        type: boolean
+
+    secrets:
+      token:
+        required: true
 
 jobs:
   build:
-    strategy:
-      matrix:
-        image: [dump1090, fr24feed, piaware]
-
     permissions:
       packages: write
 
@@ -20,7 +27,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.token }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -35,7 +42,7 @@ jobs:
         with:
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          context: "{{ defaultContext }}:${{ matrix.image }}"
+          context: "{{ defaultContext }}:${{ inputs.path }}"
           platforms: linux/arm64
-          push: ${{ github.event_name == 'push' }}
-          tags: ghcr.io/ranisalt/${{ matrix.image }}:latest
+          push: ${{ inputs.push }}
+          tags: ghcr.io/ranisalt/${{ matrix.path }}:latest

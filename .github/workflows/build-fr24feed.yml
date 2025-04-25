@@ -1,0 +1,17 @@
+name: Build fr24feed
+
+on:
+  push:
+    branches: [main]
+    paths: [fr24feed/**]
+
+jobs:
+  build-fr24feed:
+    permissions:
+      packages: write
+    uses: ./.github/workflow/build-workflow.yml
+    with:
+      path: fr24feed
+      push: ${{ github.event_name == 'push' }}
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}

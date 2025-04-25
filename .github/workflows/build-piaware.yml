@@ -1,0 +1,17 @@
+name: Build piaware
+
+on:
+  push:
+    branches: [main]
+    paths: [piaware/**]
+
+jobs:
+  build-piaware:
+    permissions:
+      packages: write
+    uses: ./.github/workflow/build-workflow.yml
+    with:
+      path: piaware
+      push: ${{ github.event_name == 'push' }}
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,17 @@
+name: Build dump1090
+
+on:
+  push:
+    branches: [main]
+    paths: [dump1090/**]
+
+jobs:
+  build-dump1090:
+    permissions:
+      packages: write
+    uses: ./.github/workflow/build-workflow.yml
+    with:
+      path: dump1090
+      push: ${{ github.event_name == 'push' }}
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}

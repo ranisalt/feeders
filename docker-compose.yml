@@ -1,0 +1,30 @@
+---
+services:
+  flightaware:
+    image: ghcr.io/ranisalt/piaware:latest
+    container_name: feeder_flightaware
+    volumes:
+      - ./piaware.conf:/etc/piaware.conf
+    depends_on:
+      - dump1090
+    restart: unless-stopped
+
+  flightradar24:
+    image: ghcr.io/ranisalt/fr24feed:latest
+    container_name: feeder_flightradar24
+    volumes:
+      - ./fr24feed.ini:/etc/fr24feed.ini
+    ports:
+      - 8754:8754
+    depends_on:
+      - dump1090
+    restart: unless-stopped
+
+  dump1090:
+    image: ghcr.io/ranisalt/dump1090:latest
+    container_name: feeder_dump1090 
+    devices:
+      - /dev/bus/usb:/dev/bus/usb:r
+    group_add:
+      - keep-groups
+    restart: unless-stopped
