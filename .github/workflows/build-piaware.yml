@@ -3,7 +3,9 @@ name: Build piaware
 on:
   push:
     branches: [main]
-    paths: [piaware/**]
+    paths:
+      - .github/workflows/build-piaware.yml
+      - piaware/**
 
 jobs:
   build-piaware:

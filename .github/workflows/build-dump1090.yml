@@ -3,7 +3,9 @@ name: Build dump1090
 on:
   push:
     branches: [main]
-    paths: [dump1090/**]
+    paths:
+      - .github/workflows/build-dump1090.yml
+      - dump1090/**
 
 jobs:
   build-dump1090:

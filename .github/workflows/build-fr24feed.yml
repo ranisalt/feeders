@@ -3,7 +3,9 @@ name: Build fr24feed
 on:
   push:
     branches: [main]
-    paths: [fr24feed/**]
+    paths:
+      - .github/workflows/build-fr24feed.yml
+      - fr24feed/**
 
 jobs:
   build-fr24feed:
