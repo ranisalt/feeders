@@ -45,4 +45,4 @@ jobs:
           context: "{{ defaultContext }}:${{ inputs.path }}"
           platforms: linux/arm64
           push: ${{ inputs.push }}
-          tags: ghcr.io/ranisalt/${{ matrix.path }}:latest
+          tags: ghcr.io/ranisalt/${{ inputs.path }}:latest

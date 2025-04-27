@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - .github/workflows/build-piaware.yml
+      - .github/workflows/build-workflow.yml
       - piaware/**
 
 jobs:

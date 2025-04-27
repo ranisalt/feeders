@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - .github/workflows/build-fr24feed.yml
+      - .github/workflows/build-workflow.yml
       - fr24feed/**
 
 jobs:

@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - .github/workflows/build-dump1090.yml
+      - .github/workflows/build-workflow.yml
       - dump1090/**
 
 jobs:
