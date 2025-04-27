@@ -1,0 +1,12 @@
+[Container]
+AddDevice=/dev/bus/usb:/dev/bus/usb:r
+ContainerName=%N
+Image=ghcr.io/ranisalt/dump1090:latest
+PodmanArgs=--group-add keep-groups
+
+[Service]
+Restart=on-success
+
+# Optional, uncomment to start on boot
+#[Install]
+#WantedBy=default.target

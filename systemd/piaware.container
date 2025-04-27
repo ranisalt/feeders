@@ -1,0 +1,12 @@
+[Container]
+ContainerName=%N
+Image=ghcr.io/ranisalt/piaware:latest
+Network=dump1090.container
+Volume=%E/piaware/piaware.conf:/etc/piaware.conf
+
+[Service]
+Restart=on-success
+
+# Optional, uncomment to start on boot
+#[Install]
+#WantedBy=default.target

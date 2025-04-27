@@ -1,0 +1,14 @@
+[Container]
+ContainerName=%N
+Image=ghcr.io/ranisalt/fr24feed:latest
+Network=dump1090.container
+# Optional, uncomment to access web UI on port 8754
+#PublishPort=8754:8754
+Volume=%E/fr24feed/fr24feed.ini:/etc/fr24feed.ini
+
+[Service]
+Restart=on-success
+
+# Optional, uncomment to start on boot
+#[Install]
+#WantedBy=default.target

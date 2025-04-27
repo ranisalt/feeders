@@ -14,8 +14,9 @@ services:
     container_name: feeder_flightradar24
     volumes:
       - ./fr24feed.ini:/etc/fr24feed.ini
-    ports:
-      - 8754:8754
+    # Optional, uncomment to access web UI on port 8754
+    #ports:
+    #  - 8754:8754
     depends_on:
       - dump1090
     restart: unless-stopped
