@@ -32,7 +32,7 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
         with:
-          platforms: linux/arm64
+          platforms: linux/amd64,linux/arm64
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -43,6 +43,6 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           context: "{{ defaultContext }}:${{ inputs.path }}"
-          platforms: linux/arm64
+          platforms: linux/amd64,linux/arm64
           push: ${{ inputs.push }}
           tags: ghcr.io/ranisalt/${{ inputs.path }}:latest

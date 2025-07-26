@@ -2,9 +2,10 @@ FROM debian:12-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt update -yq && apt install -yq ca-certificates curl gpg && \
+RUN { if [ "$(uname -m)" = "x86_64" ]; then SYSTEM=linux; elif [ "$(uname -m)" = "aarch64" ]; then SYSTEM=raspberrypi; else exit 1; fi; } || exit 1 && \
+    apt update -yq && apt install -yq ca-certificates curl gpg && \
     curl -SL https://repo-feed.flightradar24.com/flightradar24.pub | gpg --dearmor - > /etc/apt/keyrings/flightradar24.gpg && \
-    echo "deb [signed-by=/etc/apt/keyrings/flightradar24.gpg] https://repo-feed.flightradar24.com flightradar24 raspberrypi-stable" > /etc/apt/sources.list.d/fr24feed.list && \
+    echo "deb [signed-by=/etc/apt/keyrings/flightradar24.gpg] https://repo-feed.flightradar24.com flightradar24 ${SYSTEM}-stable" > /etc/apt/sources.list.d/fr24feed.list && \
     apt purge -yq curl gpg && apt autoremove --purge -yq
 
 WORKDIR /tmp
