@@ -8,6 +8,8 @@ on:
       - .github/workflows/build-workflow.yml
       - piaware/**
 
+  workflow_dispatch:
+
 jobs:
   build-piaware:
     permissions:
