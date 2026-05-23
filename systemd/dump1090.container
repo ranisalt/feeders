@@ -5,7 +5,8 @@ Image=ghcr.io/ranisalt/dump1090:latest
 PodmanArgs=--group-add keep-groups
 
 [Service]
-Restart=on-success
+Restart=always
+RestartSec=5s
 
 # Optional, uncomment to start on boot
 #[Install]

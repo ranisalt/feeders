@@ -7,7 +7,8 @@ Network=dump1090.container
 Volume=%E/fr24feed/fr24feed.ini:/etc/fr24feed.ini
 
 [Service]
-Restart=on-success
+Restart=always
+RestartSec=5s
 
 # Optional, uncomment to start on boot
 #[Install]

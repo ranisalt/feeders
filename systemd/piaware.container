@@ -5,7 +5,8 @@ Network=dump1090.container
 Volume=%E/piaware/piaware.conf:/etc/piaware.conf
 
 [Service]
-Restart=on-success
+Restart=always
+RestartSec=5s
 
 # Optional, uncomment to start on boot
 #[Install]
