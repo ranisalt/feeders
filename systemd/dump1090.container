@@ -2,6 +2,7 @@
 AddDevice=/dev/bus/usb:/dev/bus/usb:r
 ContainerName=%N
 Image=ghcr.io/ranisalt/dump1090:latest
+Network=dump1090.container
 PodmanArgs=--group-add keep-groups
 
 [Service]
