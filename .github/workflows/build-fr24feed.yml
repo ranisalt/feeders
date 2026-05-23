@@ -15,6 +15,9 @@ on:
       - .github/workflows/build-workflow.yml
       - fr24feed/**
 
+  schedule:
+    - cron: '0 0 * * 1' # every Monday at midnight
+
   workflow_dispatch:
 
 jobs:
@@ -24,6 +27,6 @@ jobs:
     uses: ./.github/workflows/build-workflow.yml
     with:
       path: fr24feed
-      push: ${{ github.event_name == 'push' }}
+      push: ${{ github.event_name == 'push' || github.event_name == 'schedule' }}
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
